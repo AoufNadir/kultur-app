@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" role="img" aria-labelledby="title desc">
+  <title id="title">KULTUR EXPORT</title>
+  <desc id="desc">KULTUR EXPORT gold logo on a black background.</desc>
+  <defs>
+    <linearGradient id="gold" x1="170" x2="850" y1="130" y2="850" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#b99b59"/>
+      <stop offset="0.5" stop-color="#efd889"/>
+      <stop offset="1" stop-color="#a98845"/>
+    </linearGradient>
+    <mask id="mark-cut">
+      <rect width="1000" height="1000" fill="black"/>
+      <circle cx="500" cy="330" r="315" fill="white"/>
+      <rect x="170" y="310" width="670" height="52" fill="black"/>
+      <path d="M224 236C360 230 510 173 640 70" fill="none" stroke="black" stroke-width="92" stroke-linecap="round"/>
+      <path d="M230 432C390 452 532 538 644 673" fill="none" stroke="black" stroke-width="92" stroke-linecap="round"/>
+      <path d="M408 628C408 538 410 448 409 362" fill="none" stroke="black" stroke-width="92" stroke-linecap="round"/>
+      <path d="M426 352L716 94" fill="none" stroke="black" stroke-width="90" stroke-linecap="round"/>
+      <path d="M426 352L693 647" fill="none" stroke="black" stroke-width="90" stroke-linecap="round"/>
+      <rect x="0" y="650" width="1000" height="350" fill="black"/>
+    </mask>
+  </defs>
+  <rect width="1000" height="1000" fill="#020202"/>
+  <circle cx="500" cy="330" r="315" fill="url(#gold)" mask="url(#mark-cut)"/>
+  <text
+    x="500"
+    y="815"
+    fill="url(#gold)"
+    font-family="Careem, 'Segoe UI', Tahoma, Arial, sans-serif"
+    font-size="86"
+    font-weight="400"
+    letter-spacing="10"
+    text-anchor="middle"
+  >KULTUR. EXPORT</text>
+  <rect x="0" y="920" width="1000" height="20" fill="url(#gold)" opacity="0.95"/>
+</svg>

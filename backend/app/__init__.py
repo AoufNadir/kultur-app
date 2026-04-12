@@ -1,0 +1,1 @@
+"""KULTUR Dashboard backend package."""

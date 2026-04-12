@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/lib/api.ts","./src/lib/calc.test.ts","./src/lib/calc.ts","./src/types/api.ts","./tests/app.spec.ts","./vite.config.ts","./vitest.config.ts","./playwright.config.ts"],"version":"5.9.3"}
