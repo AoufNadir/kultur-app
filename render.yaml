@@ -41,7 +41,7 @@ services:
         fromService:
           type: web
           name: kultur-backend
-          property: url
+          property: host
     routes:
       - type: rewrite
         source: /*
