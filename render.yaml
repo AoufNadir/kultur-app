@@ -9,7 +9,7 @@ services:
     name: kultur-backend
     env: python
     rootDir: backend
-    buildCommand: buildCommand: pip install -r requirements.txt
+    buildCommand: pip install -r requirements.txt
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     plan: free
     envVars:
@@ -21,10 +21,8 @@ services:
           property: connectionString
       - key: SECRET_KEY
         generateValue: true
-      # IMPORTANT: You will need to update CORS_ORIGINS in the Render Dashboard
-      # with the actual URL of your frontend service once it is generated.
       - key: CORS_ORIGINS
-        value: "https://kultur-frontend.onrender.com"
+        value: "https://kultur-frontend-jljp.onrender.com"
       - key: ENVIRONMENT
         value: "production"
 
@@ -33,10 +31,12 @@ services:
     env: static
     rootDir: frontend
     buildCommand: npm install && npm run build
-   staticPublishPath: dist 
+    staticPublishPath: dist
     envVars:
+      - key: NODE_VERSION
+        value: "20"
       - key: VITE_API_BASE_URL
-  value: https://kultur-backend.onrender.com
+        value: "https://kultur-backend.onrender.com"
     routes:
       - type: rewrite
         source: /*
