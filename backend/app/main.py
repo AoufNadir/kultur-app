@@ -22,11 +22,22 @@ async def lifespan(_: FastAPI):
     yield
 
 
-app = FastAPI(title=settings.app_name, version="0.1.0", lifespan=lifespan)
+app = FastAPI(
+    title=settings.app_name,
+    version="0.1.0",
+    lifespan=lifespan,
+)
+
+# Temporary explicit CORS fix for Render frontend
+allowed_origins = [
+    "https://kultur-frontend-jljp.onrender.com",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.cors_origin_list,
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
