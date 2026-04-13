@@ -6,25 +6,25 @@ databases:
 
 services:
   - type: web
-    name: kultur-backend
-    env: python
-    rootDir: backend
-    buildCommand: pip install -r requirements.txt
-    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
-    plan: free
-    envVars:
-      - key: PYTHON_VERSION
-        value: "3.11.0"
-      - key: DATABASE_URL
-        fromDatabase:
-          name: kultur-db
-          property: connectionString
-      - key: SECRET_KEY
-        generateValue: true
-      - key: CORS_ORIGINS
-        value: "https://kultur-frontend-jljp.onrender.com"
-      - key: ENVIRONMENT
-        value: "production"
+  name: kultur-backend
+  env: python
+  rootDir: backend
+  buildCommand: pip install . && pip install psycopg2-binary bcrypt==4.0.1
+  startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+  plan: free
+  envVars:
+    - key: PYTHON_VERSION
+      value: "3.11.0"
+    - key: DATABASE_URL
+      fromDatabase:
+        name: kultur-db
+        property: connectionString
+    - key: SECRET_KEY
+      generateValue: true
+    - key: CORS_ORIGINS
+      value: "https://kultur-frontend-jljp.onrender.com"
+    - key: ENVIRONMENT
+      value: "production"
 
   - type: web
     name: kultur-frontend
