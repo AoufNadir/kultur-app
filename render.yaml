@@ -9,7 +9,7 @@ services:
     name: kultur-backend
     env: python
     rootDir: backend
-    buildCommand: pip install -r requirements.txt .
+    buildCommand: buildCommand: pip install -r requirements.txt
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     plan: free
     envVars:
@@ -33,7 +33,7 @@ services:
     env: static
     rootDir: frontend
     buildCommand: npm install && npm run build
-    staticPublishPath: ./dist
+   staticPublishPath: dist 
     envVars:
       - key: NODE_VERSION
         value: "20"
