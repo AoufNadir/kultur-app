@@ -1,6 +1,6 @@
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api import api_router
@@ -9,6 +9,8 @@ from app.core.config import get_settings
 from app.db.session import SessionLocal
 
 settings = get_settings()
+
+FRONTEND_ORIGIN = "https://kultur-frontend-jljp.onrender.com"
 
 
 @asynccontextmanager
@@ -28,20 +30,33 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# Temporary explicit CORS fix for Render frontend
-allowed_origins = [
-    "https://kultur-frontend-jljp.onrender.com",
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-]
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=allowed_origins,
+    allow_origins=[FRONTEND_ORIGIN, "http://localhost:5173", "http://127.0.0.1:5173"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+# Force CORS headers on every response
+@app.middleware("http")
+async def add_cors_headers(request: Request, call_next):
+    # Handle browser preflight requests explicitly
+    if request.method == "OPTIONS":
+        response = Response(status_code=200)
+    else:
+        response = await call_next(request)
+
+    origin = request.headers.get("origin")
+    if origin in {FRONTEND_ORIGIN, "http://localhost:5173", "http://127.0.0.1:5173"}:
+        response.headers["Access-Control-Allow-Origin"] = origin
+        response.headers["Access-Control-Allow-Credentials"] = "true"
+        response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+        response.headers["Access-Control-Allow-Headers"] = "*"
+        response.headers["Vary"] = "Origin"
+
+    return response
 
 
 @app.get("/health", tags=["health"])
