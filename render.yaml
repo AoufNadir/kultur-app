@@ -35,13 +35,8 @@ services:
     buildCommand: npm install && npm run build
    staticPublishPath: dist 
     envVars:
-      - key: NODE_VERSION
-        value: "20"
       - key: VITE_API_BASE_URL
-        fromService:
-          type: web
-          name: kultur-backend
-          property: host
+  value: https://kultur-backend.onrender.com
     routes:
       - type: rewrite
         source: /*
